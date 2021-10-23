@@ -34,7 +34,7 @@ class UserController extends Controller
      * @param IndexRequest $request
      * @return JsonResponse
      */
-    public function index(IndexRequest $request)
+    public function index(IndexRequest $request): JsonResponse
     {
         return response()->json(
             IndexResourceCollection::make($this->userService->list($request->validated()))
@@ -59,7 +59,7 @@ class UserController extends Controller
      * @param User $user
      * @return JsonResponse
      */
-    public function update(UpdateRequest $request, User $user)
+    public function update(UpdateRequest $request, User $user): JsonResponse
     {
         $user->update($request->validated());
 
@@ -73,7 +73,7 @@ class UserController extends Controller
      * @param string $id
      * @return JsonResponse
      */
-    public function updateMulti(UpdateMultiRequest $request, $id)
+    public function updateMulti(UpdateMultiRequest $request, $id): JsonResponse
     {
         $this->userService->updateMulti($request->validated(), $id);
 
@@ -88,7 +88,7 @@ class UserController extends Controller
      * @param User $user
      * @return JsonResponse
      */
-    public function destroy(User $user)
+    public function destroy(User $user): JsonResponse
     {
         $user->delete();
 
@@ -100,10 +100,10 @@ class UserController extends Controller
     /**
      * Delete multi users
      *
-     * @param $id
+     * @param string $id
      * @return JsonResponse
      */
-    public function destroyMulti($id)
+    public function destroyMulti($id): JsonResponse
     {
         $this->userService->destroyMulti($id);
 

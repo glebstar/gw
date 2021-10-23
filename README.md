@@ -4,6 +4,7 @@
 + To get started, the following steps needs to be taken:
 + Clone the repo.
 + `cd gw` to the project directory.
++ create Postgres database
 + `cp .env.example .env` to use env config file
 + Run `composer install`
 + Run `php artisan migrate`
