@@ -39,7 +39,7 @@ class UserService
      *
      * @param $id
      */
-    public function destroyMulti($id): void 
+    public function destroyMulti($id): void
     {
         $ids = explode(',', $id);
 
