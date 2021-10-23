@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\IndexRequest;
+use App\Http\Requests\User\UpdateMultiRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Http\Resources\User\IndexResourceCollection;
 use App\Http\Resources\User\ShowResource;
@@ -65,6 +66,15 @@ class UserController extends Controller
         $user->update($request->validated());
 
         return response()->json(ShowResource::make($user));
+    }
+
+    public function updateMulti(UpdateMultiRequest $request, $id)
+    {
+        $this->userService->updateMulti($request->validated(), $id);
+
+        return response()->json([
+            'status' => 'ok',
+        ]);
     }
 
     /**

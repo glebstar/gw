@@ -30,4 +30,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
     Route::apiResource('users', UserController::class)->only('index', 'show', 'update', 'destroy');
+
+    Route::put('/users/multi/{id}', [UserController::class, 'updateMulti']);
+
+    Route::delete('/users/multi/{id}', [UserController::class, 'destroyMulti']);
 });
