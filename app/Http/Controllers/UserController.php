@@ -9,8 +9,6 @@ use App\Http\Resources\User\IndexResourceCollection;
 use App\Http\Resources\User\ShowResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use App\Service\UserService;
 
 class UserController extends Controller
@@ -68,6 +66,13 @@ class UserController extends Controller
         return response()->json(ShowResource::make($user));
     }
 
+    /**
+     * Update multi users
+     *
+     * @param UpdateMultiRequest $request
+     * @param string $id
+     * @return JsonResponse
+     */
     public function updateMulti(UpdateMultiRequest $request, $id)
     {
         $this->userService->updateMulti($request->validated(), $id);
@@ -86,6 +91,21 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
+
+        return response()->json([
+            'status' => 'ok',
+        ]);
+    }
+
+    /**
+     * Delete multi users
+     *
+     * @param $id
+     * @return JsonResponse
+     */
+    public function destroyMulti($id)
+    {
+        $this->userService->destroyMulti($id);
 
         return response()->json([
             'status' => 'ok',

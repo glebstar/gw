@@ -13,18 +13,18 @@ class UserService
      * @param array $data
      * @return LengthAwarePaginator
      */
-    public function list(array $data)
+    public function list(array $data): LengthAwarePaginator
     {
         return User::paginate($data['limit']);
     }
 
     /**
-     * Update Multi users
+     * Update multi users
      *
      * @param array $data
      * @param string $id
      */
-    public function updateMulti(array $data, string $id)
+    public function updateMulti(array $data, string $id): void
     {
         $ids = explode(',', $id);
 
@@ -32,5 +32,17 @@ class UserService
         $users->each(function ($user, $key) use ($data) {
             $user->update($data);
         });
+    }
+
+    /**
+     * Delete multi users
+     *
+     * @param $id
+     */
+    public function destroyMulti($id): void 
+    {
+        $ids = explode(',', $id);
+
+        User::whereIn('id', $ids)->delete();
     }
 }
